@@ -6,12 +6,12 @@ use proconio::{fastout, input};
 
 struct Mo {
     // [0] change vals type (if necessary) !!!!!!
-    vals: Vec<usize>,
+    pair_cnt: usize,
     cl: usize,
     cr: usize,
+    vals: Vec<usize>,
     // [1] add info for ans !!!!!!!
     cnts: Vec<usize>,
-    pair_cnt: usize,
 }
 
 impl Mo {
@@ -98,7 +98,7 @@ impl Mo {
     }
 }
 
-// #[fastout]
+#[fastout]
 fn main() {
     input! {
         n: usize,
