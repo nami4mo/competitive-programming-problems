@@ -1,4 +1,7 @@
 use core::panic;
+use im_rc::HashMap;
+use itertools::Itertools;
+use mytool::MyRng;
 use ordered_float::OrderedFloat;
 use proconio::input;
 use proconio::marker::Chars;
@@ -7,7 +10,7 @@ use std::collections::VecDeque;
 use std::fmt::Debug;
 use std::vec;
 
-// const SIZE: usize = 20; // 盤面のサイズ（縦 | 横）
+const SIZE: usize = 20; // 盤面のサイズ（縦 | 横）
 
 // 向きを表す Enum
 #[derive(Debug, Clone, PartialEq, Copy, Hash, Eq)]
@@ -266,27 +269,6 @@ impl State {
         }
         // self.pos = Point { y: ny, x: nx };
         (ny, nx)
-    }
-
-    // (y0, x0) から (y1, x1) に移動できるか（壁がないか）を確認
-    // (y0, x0) と (y1, x1) が隣接マスではないとき、panic!
-    pub fn is_movable(&self, y0: usize, x0: usize, y1: usize, x1: usize) -> bool {
-        let d = y0.max(y1) - y0.min(y1) + x0.max(x1) - x0.min(x1);
-        assert_eq!(
-            d, 1,
-            "({}, {}) and ({}, {}) are not adjacent.",
-            y0, x0, y1, x1
-        );
-        if x0 == x1 {
-            self.gl_y[y1.min(y0)][x0]
-        } else {
-            self.gl_x[y0][x1.min(x0)]
-        }
-    }
-
-    // (y,x) から移動できる隣接マスたち（つまり壁のない隣接マスたち）を返す
-    pub fn get_neighbors(&self, y: usize, x: usize) -> &Vec<(usize, usize)> {
-        &self.gl[y][x]
     }
 }
 
