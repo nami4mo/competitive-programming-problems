@@ -11,3 +11,6 @@ target/
 Cargo.lock
 
 ahc008/
+
+in/
+out/
